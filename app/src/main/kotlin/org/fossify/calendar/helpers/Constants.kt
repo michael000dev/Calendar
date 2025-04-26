@@ -207,6 +207,8 @@ const val SEQUENCE = "SEQUENCE"
 const val TZID = "TZID"
 const val COLOR = "COLOR:"
 const val FOSSIFY_COLOR = "X-FOSSIFY-EVENT-COLOR:"
+const val BEGIN_TIMEZONE = "BEGIN:VTIMEZONE"
+const val END_TIMEZONE = "END:VTIMEZONE"
 
 // this tag isn't a standard ICS tag, but there's no official way of adding a category color in an ics file
 const val SMT_CATEGORY_COLOR = "X-SMT-CATEGORY-COLOR:"

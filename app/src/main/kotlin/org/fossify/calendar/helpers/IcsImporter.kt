@@ -63,6 +63,9 @@ class IcsImporter(val activity: SimpleActivity) {
     private var eventsFailed = 0
     private var eventsAlreadyExist = 0
 
+    private var dateTimeZone = DateTimeZone.getDefault()
+    private var inTimeZone = false
+
     fun importEvents(
         path: String,
         defaultEventTypeId: Long,
@@ -95,7 +98,16 @@ class IcsImporter(val activity: SimpleActivity) {
                         continue
                     }
 
-                    if (line.trim() == BEGIN_EVENT) {
+                    if (line.trim() == BEGIN_TIMEZONE) {
+                        inTimeZone = true
+                    } else if (line.trim() == END_TIMEZONE) {
+                        inTimeZone = false
+                    } else if (line.startsWith(TZID) and inTimeZone) {
+                        val timeZoneId = line.substring(TZID.length + 1)
+                        if (DateTimeZone.getAvailableIDs().contains(timeZoneId)) {
+                            dateTimeZone = DateTimeZone.forID(timeZoneId)
+                        }
+                    } else if (line.trim() == BEGIN_EVENT) {
                         resetValues()
                         curEventTypeId = defaultEventTypeId
                         isParsingEvent = true
@@ -298,7 +310,7 @@ class IcsImporter(val activity: SimpleActivity) {
                             curRepeatExceptions,
                             emptyList(),
                             curImportId,
-                            DateTimeZone.getDefault().id,
+                            dateTimeZone.id,
                             curFlags,
                             curEventTypeId,
                             0,
@@ -393,7 +405,7 @@ class IcsImporter(val activity: SimpleActivity) {
 
     private fun getTimestamp(fullString: String): Long {
         return try {
-            var timeZone = DateTimeZone.getDefault()
+            var timeZone = dateTimeZone
             when {
                 fullString.startsWith(';') -> {
                     // Ideally, we should parse BEGIN:VTIMEZONE and derive the timezone from there, but to get things working, let's assume TZID refers to one
