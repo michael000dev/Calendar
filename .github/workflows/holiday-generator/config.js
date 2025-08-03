@@ -29,7 +29,9 @@ export const COUNTRIES = [
     "FR", // France
     "DE", // Germany
     "GR", // Greece
+    "GT", // Guatemala
     "HT", // Haiti
+    "HK", // Hong Kong
     "HU", // Hungary
     "IS", // Iceland
     "ID", // Indonesia
@@ -69,6 +71,7 @@ export const COUNTRIES = [
     "GB", // United Kingdom
     "US", // United States
     "UY", // Uruguay
+    "VN", // Vietnam
 ];
 
 export const UNSUPPORTED_COUNTRIES = {

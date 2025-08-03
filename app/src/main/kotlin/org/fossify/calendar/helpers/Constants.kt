@@ -6,7 +6,6 @@ import org.fossify.calendar.activities.TaskActivity
 import org.fossify.commons.helpers.MONTH_SECONDS
 import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
-import java.util.Calendar
 import java.util.UUID
 
 const val STORED_LOCALLY_ONLY = 0
@@ -88,7 +87,6 @@ const val EVENT_LIST_PERIOD = "event_list_period"
 const val WEEK_NUMBERS = "week_numbers"
 const val START_WEEKLY_AT = "start_weekly_at"
 const val START_WEEK_WITH_CURRENT_DAY = "start_week_with_current_day"
-const val FIRST_DAY_OF_WEEK = "first_day_of_week"
 const val SHOW_MIDNIGHT_SPANNING_EVENTS_AT_TOP = "show_midnight_spanning_events_at_top"
 const val ALLOW_CUSTOMIZE_DAY_COUNT = "allow_customise_day_count"
 const val VIBRATE = "vibrate"
@@ -277,6 +275,7 @@ const val REPEAT_LIMIT = "REPEAT_LIMIT"
 const val REPEAT_RULE = "REPEAT_RULE"
 const val ATTENDEES = "ATTENDEES"
 const val AVAILABILITY = "AVAILABILITY"
+const val CLASS = "CLASS"
 const val EVENT_TYPE_ID = "EVENT_TYPE_ID"
 const val EVENT_CALENDAR_ID = "EVENT_CALENDAR_ID"
 const val IS_NEW_EVENT = "IS_NEW_EVENT"
@@ -285,6 +284,11 @@ const val EVENT_COLOR = "EVENT_COLOR"
 // From Status attribute (RFC 5545 3.8.1.11)
 const val CANCELLED = "CANCELLED"
 const val TENTATIVE = "TENTATIVE"
+
+//From Classification attribute (RFC 2445 4.8.1.3)
+const val PUBLIC = "PUBLIC"
+const val PRIVATE = "PRIVATE"
+const val CONFIDENTIAL = "CONFIDENTIAL"
 
 // actions
 const val ACTION_MARK_COMPLETED = "ACTION_MARK_COMPLETED"
@@ -322,36 +326,18 @@ fun getPreviousAutoBackupTime(): DateTime {
     return nextBackupTime.minusDays(AUTO_BACKUP_INTERVAL_IN_DAYS)
 }
 
-fun getJodaDayOfWeekFromJava(dayOfWeek: Int): Int {
-    return when (dayOfWeek) {
-        Calendar.SUNDAY -> DateTimeConstants.SUNDAY
-        Calendar.MONDAY -> DateTimeConstants.MONDAY
-        Calendar.TUESDAY -> DateTimeConstants.TUESDAY
-        Calendar.WEDNESDAY -> DateTimeConstants.WEDNESDAY
-        Calendar.THURSDAY -> DateTimeConstants.THURSDAY
-        Calendar.FRIDAY -> DateTimeConstants.FRIDAY
-        Calendar.SATURDAY -> DateTimeConstants.SATURDAY
-        else -> throw IllegalArgumentException("Invalid day: $dayOfWeek")
-    }
-}
-
-fun getJavaDayOfWeekFromJoda(dayOfWeek: Int): Int {
-    return when (dayOfWeek) {
-        DateTimeConstants.SUNDAY -> Calendar.SUNDAY
-        DateTimeConstants.MONDAY -> Calendar.MONDAY
-        DateTimeConstants.TUESDAY -> Calendar.TUESDAY
-        DateTimeConstants.WEDNESDAY -> Calendar.WEDNESDAY
-        DateTimeConstants.THURSDAY -> Calendar.THURSDAY
-        DateTimeConstants.FRIDAY -> Calendar.FRIDAY
-        DateTimeConstants.SATURDAY -> Calendar.SATURDAY
-        else -> throw IllegalArgumentException("Invalid day: $dayOfWeek")
-    }
-}
-
 fun getStatusStringFromEventStatus(statusCode: Int): String {
     return when (statusCode) {
         Events.STATUS_CONFIRMED -> CONFIRMED
         Events.STATUS_CANCELED -> CANCELLED
         else -> TENTATIVE
+    }
+}
+
+fun getAccessLevelStringFromEventAccessLevel(accessLevel: Int): String {
+    return when (accessLevel) {
+        Events.ACCESS_PRIVATE -> PRIVATE
+        Events.ACCESS_CONFIDENTIAL -> CONFIDENTIAL
+        else -> PUBLIC
     }
 }
