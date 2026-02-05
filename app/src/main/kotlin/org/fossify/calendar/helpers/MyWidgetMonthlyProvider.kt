@@ -139,8 +139,9 @@ class MyWidgetMonthlyProvider : AppWidgetProvider() {
             day.dayEvents.forEach {
                 val backgroundColor = it.color
                 var eventTextColor = backgroundColor.getContrastColor()
-
-                if (it.isTask() && it.isTaskCompleted() && dimCompletedTasks || !day.isThisMonth || (dimPastEvents && it.isPastEvent && !it.isTask())) {
+                val shouldDim = (it.isTask() && it.isTaskCompleted() && dimCompletedTasks)
+                    || (dimPastEvents && it.isPastEvent && !it.isTask())
+                if (shouldDim) {
                     eventTextColor = eventTextColor.adjustAlpha(MEDIUM_ALPHA)
                 }
 
@@ -235,7 +236,7 @@ class MyWidgetMonthlyProvider : AppWidgetProvider() {
         val firstDayOfWeek = config.firstDayOfWeek
         val smallerFontSize = context.getWidgetFontSize()
         val packageName = context.packageName
-        val letters = context.resources.getStringArray(org.fossify.commons.R.array.week_day_letters)
+        val letters = context.resources.getStringArray(org.fossify.commons.R.array.week_days_short)
 
         for (i in 0..6) {
             val id = resources.getIdentifier("label_$i", "id", packageName)

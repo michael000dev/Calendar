@@ -16,6 +16,7 @@ import org.fossify.calendar.models.DayMonthly
 import org.fossify.calendar.models.Event
 import org.fossify.calendar.models.MonthViewEvent
 import org.fossify.commons.extensions.*
+import org.fossify.commons.helpers.FontHelper
 import org.fossify.commons.helpers.HIGHER_ALPHA
 import org.fossify.commons.helpers.LOWER_ALPHA
 import org.fossify.commons.helpers.MEDIUM_ALPHA
@@ -83,6 +84,7 @@ class MonthView(context: Context, attrs: AttributeSet, defStyle: Int) : View(con
             color = textColor
             textSize = normalTextSize.toFloat()
             textAlign = Paint.Align.CENTER
+            typeface = FontHelper.getTypeface(context)
         }
 
         eventDotPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -91,6 +93,7 @@ class MonthView(context: Context, attrs: AttributeSet, defStyle: Int) : View(con
             alpha = 175
             textSize = normalTextSize.toFloat()
             textAlign = Paint.Align.CENTER
+            typeface = FontHelper.getTypeface(context)
         }
 
         gridPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -109,6 +112,7 @@ class MonthView(context: Context, attrs: AttributeSet, defStyle: Int) : View(con
             color = textColor
             textSize = smallerTextSize.toFloat()
             textAlign = Paint.Align.LEFT
+            typeface = FontHelper.getTypeface(context)
         }
 
         initWeekDayLetters()
@@ -361,12 +365,10 @@ class MonthView(context: Context, attrs: AttributeSet, defStyle: Int) : View(con
             }
         }
 
-        val startDayIndex = days[event.originalStartDayIndex]
-        val endDayIndex = days[min(event.startDayIndex + event.daysCnt - 1, 41)]
         bgRectF.set(bgLeft, bgTop, bgRight, bgBottom)
-        canvas.drawRoundRect(bgRectF, BG_CORNER_RADIUS, BG_CORNER_RADIUS, getEventBackgroundColor(event, startDayIndex, endDayIndex))
+        canvas.drawRoundRect(bgRectF, BG_CORNER_RADIUS, BG_CORNER_RADIUS, getEventBackgroundColor(event))
 
-        val specificEventTitlePaint = getEventTitlePaint(event, startDayIndex, endDayIndex)
+        val specificEventTitlePaint = getEventTitlePaint(event)
         var taskIconWidth = 0
         if (event.isTask) {
             val taskIcon = resources.getColoredDrawableWithColor(R.drawable.ic_task_vector, specificEventTitlePaint.color).mutate()
@@ -408,12 +410,11 @@ class MonthView(context: Context, attrs: AttributeSet, defStyle: Int) : View(con
         return curPaint
     }
 
-    private fun getEventBackgroundColor(event: MonthViewEvent, startDay: DayMonthly, endDay: DayMonthly): Paint {
+    private fun getEventBackgroundColor(event: MonthViewEvent): Paint {
         var paintColor = event.color
 
         val adjustAlpha = when {
             event.isTask -> dimCompletedTasks && event.isTaskCompleted
-            !startDay.isThisMonth && !endDay.isThisMonth -> true
             else -> dimPastEvents && event.isPastEvent && !isPrintVersion
         }
 
@@ -424,11 +425,10 @@ class MonthView(context: Context, attrs: AttributeSet, defStyle: Int) : View(con
         return getColoredPaint(paintColor)
     }
 
-    private fun getEventTitlePaint(event: MonthViewEvent, startDay: DayMonthly, endDay: DayMonthly): Paint {
+    private fun getEventTitlePaint(event: MonthViewEvent): Paint {
         var paintColor = event.color.getContrastColor()
         val adjustAlpha = when {
             event.isTask -> dimCompletedTasks && event.isTaskCompleted
-            !startDay.isThisMonth && !endDay.isThisMonth -> true
             else -> dimPastEvents && event.isPastEvent && !isPrintVersion
         }
 
@@ -453,7 +453,9 @@ class MonthView(context: Context, attrs: AttributeSet, defStyle: Int) : View(con
     }
 
     private fun initWeekDayLetters() {
-        dayLetters = context.withFirstDayOfWeekToFront(context.resources.getStringArray(org.fossify.commons.R.array.week_day_letters).toList())
+        dayLetters = context.withFirstDayOfWeekToFront(
+            context.resources.getStringArray(org.fossify.commons.R.array.week_days_short).toList()
+        )
     }
 
     private fun setupCurrentDayOfWeekIndex() {

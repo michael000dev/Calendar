@@ -6,6 +6,95 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.10.2] - 2026-02-04
+### Fixed
+- Fixed crash in event editor when CalDAV sync is disabled ([#1024])
+
+## [1.10.1] - 2026-02-03
+### Changed
+- Updated holiday data
+- Updated translations
+
+### Fixed
+- Fixed last used default calendar preference for new events ([#1019])
+
+## [1.10.0] - 2026-01-30
+### Added
+- Added support for custom fonts
+- Location suggestions in event editor using recently used locations ([#393])
+
+### Changed
+- Unified the local and synchronized calendar pickers in event editor ([#629])
+- Updated holiday data ([#1003])
+- Updated translations
+
+## [1.9.0] - 2025-12-16
+### Changed
+- Replaced "event types" concept with "calendars" ([#629])
+- Renamed built-in "Regular event" calendar to "Local calendar"
+- Weekday labels now use three-letter abbreviations instead of single letters ([#103])
+- Converting all-day events to timed events now respects the default start time and duration ([#917])
+- Updated translations
+
+### Fixed
+- Fixed crashes and freezing on some devices ([#889])
+
+## [1.8.1] - 2025-11-09
+### Changed
+- Updated holiday data
+- Updated translations
+
+### Fixed
+- Fixed startup crash in weekly view ([#550])
+- Fixed incorrect weekly view start date in some cases ([#45])
+- Fixed issue with Up/Arrow button closing the app ([#870])
+- Fixed time drift when switching between views ([#590])
+
+## [1.8.0] - 2025-10-29
+### Changed
+- Compatibility updates for Android 15 & 16
+- Removed permission to access network state (it was added accidentally) ([#826])
+- Updated holiday data
+- Updated translations
+
+## [1.7.0] - 2025-10-16
+### Changed
+- Events shown in adjacent months are no longer dimmed ([#808])
+- Updated translations
+
+### Fixed
+- Fixed missing email notifications for attendees in some cases ([#135])
+- Fixed missing attendees list when using some specific providers ([#818])
+
+## [1.6.2] - 2025-10-09
+### Changed
+- Synchronized events with unspecified status are now treated as confirmed ([#761])
+- Updated translations
+
+### Fixed
+- Fixed event duplication when editing instances of recurring events ([#138])
+- Fixed old reminders not being removed when moving events ([#486])
+- Fixed drag and drop copying events instead of moving them ([#706])
+- Fixed crash when editing events with attendees ([#34])
+- Fixed event edits being silently discarded on back press ([#49])
+- Fixed synchronization issues when editing events in a recurring series ([#641])
+
+## [1.6.1] - 2025-09-01
+### Changed
+- Declined events will no longer trigger notifications ([#732])
+- Updated translations
+
+### Fixed
+- Fixed incorrect widget font size on foldable devices ([#337])
+- Fixed missing or delayed reminders in some cases ([#217])
+
+## [1.6.0] - 2025-08-21
+### Added
+- Holidays for Philippines ([#729])
+
+### Changed
+- Updated translations
+
 ## [1.5.0] - 2025-07-22
 ### Added
 - Holidays for Guatemala ([#682])
@@ -102,19 +191,56 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
+[#34]: https://github.com/FossifyOrg/Calendar/issues/34
+[#45]: https://github.com/FossifyOrg/Calendar/issues/45
+[#49]: https://github.com/FossifyOrg/Calendar/issues/49
+[#103]: https://github.com/FossifyOrg/Calendar/issues/103
+[#135]: https://github.com/FossifyOrg/Calendar/issues/135
+[#138]: https://github.com/FossifyOrg/Calendar/issues/138
 [#148]: https://github.com/FossifyOrg/Calendar/issues/148
 [#196]: https://github.com/FossifyOrg/Calendar/issues/196
+[#217]: https://github.com/FossifyOrg/Calendar/issues/217
 [#262]: https://github.com/FossifyOrg/Calendar/issues/262
+[#337]: https://github.com/FossifyOrg/Calendar/issues/337
+[#393]: https://github.com/FossifyOrg/Calendar/issues/393
 [#394]: https://github.com/FossifyOrg/Calendar/issues/394
 [#484]: https://github.com/FossifyOrg/Calendar/issues/484
+[#486]: https://github.com/FossifyOrg/Calendar/issues/486
+[#550]: https://github.com/FossifyOrg/Calendar/issues/550
 [#551]: https://github.com/FossifyOrg/Calendar/issues/551
 [#567]: https://github.com/FossifyOrg/Calendar/issues/567
 [#574]: https://github.com/FossifyOrg/Calendar/issues/574
+[#590]: https://github.com/FossifyOrg/Calendar/issues/590
 [#603]: https://github.com/FossifyOrg/Calendar/issues/603
 [#613]: https://github.com/FossifyOrg/Calendar/issues/613
+[#629]: https://github.com/FossifyOrg/Calendar/issues/629
+[#641]: https://github.com/FossifyOrg/Calendar/issues/641
 [#682]: https://github.com/FossifyOrg/Calendar/issues/682
+[#706]: https://github.com/FossifyOrg/Calendar/issues/706
+[#729]: https://github.com/FossifyOrg/Calendar/issues/729
+[#732]: https://github.com/FossifyOrg/Calendar/issues/732
+[#761]: https://github.com/FossifyOrg/Calendar/issues/761
+[#808]: https://github.com/FossifyOrg/Calendar/issues/808
+[#818]: https://github.com/FossifyOrg/Calendar/issues/818
+[#826]: https://github.com/FossifyOrg/Calendar/issues/826
+[#870]: https://github.com/FossifyOrg/Calendar/issues/870
+[#889]: https://github.com/FossifyOrg/Calendar/issues/889
+[#917]: https://github.com/FossifyOrg/Calendar/issues/917
+[#1003]: https://github.com/FossifyOrg/Calendar/issues/1003
+[#1019]: https://github.com/FossifyOrg/Calendar/issues/1019
+[#1024]: https://github.com/FossifyOrg/Calendar/issues/1024
 
-[Unreleased]: https://github.com/FossifyOrg/Calendar/compare/1.5.0...HEAD
+[Unreleased]: https://github.com/FossifyOrg/Calendar/compare/1.10.2...HEAD
+[1.10.2]: https://github.com/FossifyOrg/Calendar/compare/1.10.1...1.10.2
+[1.10.1]: https://github.com/FossifyOrg/Calendar/compare/1.10.0...1.10.1
+[1.10.0]: https://github.com/FossifyOrg/Calendar/compare/1.9.0...1.10.0
+[1.9.0]: https://github.com/FossifyOrg/Calendar/compare/1.8.1...1.9.0
+[1.8.1]: https://github.com/FossifyOrg/Calendar/compare/1.8.0...1.8.1
+[1.8.0]: https://github.com/FossifyOrg/Calendar/compare/1.7.0...1.8.0
+[1.7.0]: https://github.com/FossifyOrg/Calendar/compare/1.6.2...1.7.0
+[1.6.2]: https://github.com/FossifyOrg/Calendar/compare/1.6.1...1.6.2
+[1.6.1]: https://github.com/FossifyOrg/Calendar/compare/1.6.0...1.6.1
+[1.6.0]: https://github.com/FossifyOrg/Calendar/compare/1.5.0...1.6.0
 [1.5.0]: https://github.com/FossifyOrg/Calendar/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/FossifyOrg/Calendar/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/FossifyOrg/Calendar/compare/1.2.0...1.3.0

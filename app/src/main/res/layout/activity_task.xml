@@ -6,22 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/task_toolbar"
+    <org.fossify.commons.views.MyAppBarLayout
+        android:id="@+id/task_appbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_primary"
-        app:menu="@menu/menu_task"
-        app:title="@string/app_launcher_name"
-        app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/task_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/color_primary"
+            app:menu="@menu/menu_task"
+            app:title="@string/app_launcher_name"
+            app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
+
+    </org.fossify.commons.views.MyAppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/task_nested_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:fillViewport="true"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout
             android:id="@+id/task_holder"
@@ -315,43 +322,59 @@
                 android:importantForAccessibility="no" />
 
             <ImageView
-                android:id="@+id/task_type_image"
+                android:id="@+id/calendar_image"
                 android:layout_width="@dimen/smaller_icon_size"
                 android:layout_height="@dimen/smaller_icon_size"
                 android:layout_below="@+id/task_repetition_divider"
-                android:layout_alignTop="@+id/task_type_holder"
-                android:layout_alignBottom="@+id/task_type_holder"
+                android:layout_alignTop="@+id/calendar_holder"
+                android:layout_alignBottom="@+id/calendar_holder"
                 android:layout_marginStart="@dimen/normal_margin"
                 android:padding="@dimen/medium_margin"
-                android:src="@drawable/ic_category_outline_vector" />
+                android:src="@drawable/ic_calendar_vector" />
 
             <RelativeLayout
-                android:id="@+id/task_type_holder"
+                android:id="@+id/calendar_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/task_repetition_divider"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_marginBottom="@dimen/medium_margin"
-                android:layout_toEndOf="@+id/task_type_image"
+                android:layout_toEndOf="@+id/calendar_image"
                 android:background="?attr/selectableItemBackground">
 
                 <org.fossify.commons.views.MyTextView
-                    android:id="@+id/task_type"
+                    android:id="@+id/calendar_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/small_margin"
-                    android:layout_marginEnd="@dimen/medium_margin"
-                    android:paddingTop="@dimen/normal_margin"
-                    android:paddingBottom="@dimen/normal_margin"
-                    android:textSize="@dimen/day_text_size" />
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingStart="0dp"
+                    android:paddingTop="@dimen/medium_margin"
+                    android:paddingEnd="@dimen/activity_margin"
+                    android:paddingBottom="@dimen/tiny_margin"
+                    android:textSize="@dimen/day_text_size"
+                    tools:text="@string/regular_event" />
+
+                <org.fossify.commons.views.MyTextView
+                    android:id="@+id/calendar_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/calendar_title"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="@dimen/medium_margin"
+                    android:paddingBottom="@dimen/medium_margin"
+                    android:textSize="@dimen/meta_text_size"
+                    tools:text="@string/offline_never_synced" />
 
             </RelativeLayout>
 
             <ImageView
-                android:id="@+id/task_type_divider"
+                android:id="@+id/calendar_divider"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_height"
-                android:layout_below="@+id/task_type_holder"
+                android:layout_below="@+id/calendar_holder"
                 android:background="@color/divider_grey"
                 android:importantForAccessibility="no" />
 
@@ -359,7 +382,7 @@
                 android:id="@+id/task_color_image"
                 android:layout_width="@dimen/smaller_icon_size"
                 android:layout_height="@dimen/smaller_icon_size"
-                android:layout_below="@+id/task_type_divider"
+                android:layout_below="@+id/calendar_divider"
                 android:layout_alignTop="@+id/task_color_holder"
                 android:layout_alignBottom="@+id/task_color_holder"
                 android:layout_marginStart="@dimen/normal_margin"
@@ -370,7 +393,7 @@
                 android:id="@+id/task_color_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/task_type_divider"
+                android:layout_below="@+id/calendar_divider"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:layout_marginBottom="@dimen/medium_margin"
                 android:layout_toEndOf="@+id/task_color_image"

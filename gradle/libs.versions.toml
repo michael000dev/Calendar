@@ -1,25 +1,26 @@
 [versions]
 #jetbrains
-kotlin = "2.2.0"
+kotlin = "2.3.0"
 #KSP
-ksp = "2.2.0-2.0.2"
+ksp = "2.3.5"
 #Detekt
 detekt = "1.23.8"
-detektCompose = "0.4.25"
+detektCompose = "0.4.28"
 #Androidx
 multidex = "2.0.1"
 print = "1.1.0"
 constraintlayout = "2.2.1"
-swiperefreshlayout = "1.1.0"
+swiperefreshlayout = "1.2.0"
+work = "2.11.1"
 #Room
-room = "2.7.2"
+room = "2.8.4"
 #Fossify
-commons = "4.3.0"
+commons = "6.1.0"
 #Gradle
 gradlePlugins-agp = "8.11.1"
 #build
-app-build-compileSDKVersion = "34"
-app-build-targetSDK = "34"
+app-build-compileSDKVersion = "36"
+app-build-targetSDK = "36"
 app-build-minimumSDK = "26"
 app-build-javaVersion = "VERSION_17"
 app-build-kotlinJVMTarget = "17"
@@ -29,6 +30,7 @@ androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayo
 androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
 androidx-print = { module = "androidx.print:print", version.ref = "print" }
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 #Room
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }

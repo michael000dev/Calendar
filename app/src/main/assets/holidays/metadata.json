@@ -217,6 +217,13 @@
     "other": "holidays/IL/other.ics"
   },
   {
+    "code": "IN",
+    "country": "India",
+    "public": "holidays/IN/public.ics",
+    "regional": null,
+    "other": null
+  },
+  {
     "code": "IS",
     "country": "Ísland",
     "public": "holidays/IS/public.ics",
@@ -327,6 +334,13 @@
     "public": "holidays/NO/public.ics",
     "regional": null,
     "other": "holidays/NO/other.ics"
+  },
+  {
+    "code": "PH",
+    "country": "Philippines",
+    "public": "holidays/PH/public.ics",
+    "regional": null,
+    "other": "holidays/PH/other.ics"
   },
   {
     "code": "PL",
